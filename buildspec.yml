@@ -5,22 +5,28 @@ phases:
     runtime-versions:
       java: corretto21
     commands:
-      - echo "Environment ready"
+      - echo "===== INSTALL PHASE ====="
+      - echo "Forcing Java 21 binding"
+      - export JAVA_HOME=/usr/lib/jvm/java-21-amazon-corretto
+      - export PATH=$JAVA_HOME/bin:$PATH
+      - java -version
+      - mvn -version
+
+  pre_build:
+    commands:
+      - echo "===== PRE-BUILD PHASE ====="
+      - mvn clean
 
   build:
     commands:
-      - echo "Building Spring Boot application"
-      - mvn clean package -DskipTests
+      - echo "===== BUILD PHASE ====="
+      - mvn package -DskipTests
 
   post_build:
     commands:
+      - echo "===== POST-BUILD PHASE ====="
       - echo "Build completed successfully"
 
 artifacts:
   files:
     - target/*.jar
-  discard-paths: yes
-
-cache:
-  paths:
-    - /root/.m2/**/*
