@@ -2,21 +2,18 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      java: corretto21
     commands:
-      - echo "Installing Amazon Corretto 21..."
-      - yum install -y java-21-amazon-corretto-devel
-      - export JAVA_HOME=/usr/lib/jvm/java-21-amazon-corretto
-      - export PATH=$JAVA_HOME/bin:$PATH
-      - java -version
-      - mvn -version
+      - echo "Installing dependencies"
 
   pre_build:
     commands:
-      - echo "Pre-build phase started"
+      - echo "Skipping Docker login"
 
   build:
     commands:
-      - echo "Building application with Java 21"
+      - echo "Building application"
       - mvn clean package -DskipTests
 
   post_build:
