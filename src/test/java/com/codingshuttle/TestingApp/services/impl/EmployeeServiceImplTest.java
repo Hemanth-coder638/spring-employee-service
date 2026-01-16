@@ -50,7 +50,7 @@ class EmployeeServiceImplTest {
         mockEmployee = Employee.builder()
                 .id(1L)
                 .email("anuj@gmail.com")
-                .name("Anuj")
+                .fullName("Anuj")
                 .salary(200L)
                 .build();
 
