@@ -11,17 +11,17 @@ phases:
 
   pre_build:
     commands:
-      - echo "Starting pre-build checks"
+      - echo "Pre-build checks"
       - chmod +x mvnw || true
 
   build:
     commands:
-      - echo "Executing Maven build"
+      - echo "Running Maven build"
       - mvn clean package -DskipTests
 
-post_build:
-  commands:
-    - echo "Build completed successfully"
+  post_build:
+    commands:
+      - echo "Build completed successfully"
 
 artifacts:
   files:
