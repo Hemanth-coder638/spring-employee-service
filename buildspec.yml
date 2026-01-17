@@ -5,14 +5,25 @@ phases:
     runtime-versions:
       java: corretto21
     commands:
-      - echo "Using Java 21"
+      - echo "Initializing build environment"
       - java -version
       - mvn -version
 
+  pre_build:
+    commands:
+      - echo "Starting pre-build checks"
+      - chmod +x mvnw || true
+
   build:
     commands:
+      - echo "Executing Maven build"
       - mvn clean package -DskipTests
+
+post_build:
+  commands:
+    - echo "Build completed successfully"
 
 artifacts:
   files:
     - target/*.jar
+  discard-paths: yes
